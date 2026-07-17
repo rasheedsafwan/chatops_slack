@@ -66,11 +66,13 @@ jobs:
           TF_VAR_slack_workspace_id: ${{ secrets.SLACK_WORKSPACE_ID }}
           TF_VAR_slack_channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
 
-      - name: Upload plan artifact
+      - name: Upload plan and build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: tfplan
-          path: environments/dev/tfplan
+          name: tf-artifacts
+          path: |
+            environments/dev/tfplan
+            environments/build/
 
   apply:
     needs: plan
@@ -96,17 +98,14 @@ jobs:
         with:
           terraform_version: "1.9.0"
 
-      - name: Ensure Lambda build directory exists
-        run: mkdir -p ../../build
+      - name: Download plan and build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: tf-artifacts
+          path: environments/
 
       - name: Terraform Init
         run: terraform init
-
-      - name: Download plan artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: tfplan
-          path: environments/dev
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
