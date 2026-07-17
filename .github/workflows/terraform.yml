@@ -66,13 +66,17 @@ jobs:
           TF_VAR_slack_workspace_id: ${{ secrets.SLACK_WORKSPACE_ID }}
           TF_VAR_slack_channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
 
-      - name: Upload plan and build artifacts
+      - name: Upload TF Plan Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tf-artifacts
-          path: |
-            environments/dev/tfplan
-            environments/build/
+          name: tfplan
+          path: environments/dev/tfplan
+
+      - name: Upload Lambda ZIP Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lambda-zips
+          path: environments/build/
 
   apply:
     needs: plan
@@ -98,11 +102,17 @@ jobs:
         with:
           terraform_version: "1.9.0"
 
-      - name: Download plan and build artifacts
+      - name: Download TF Plan
         uses: actions/download-artifact@v4
         with:
-          name: tf-artifacts
-          path: environments/
+          name: tfplan
+          path: environments/dev
+
+      - name: Download Lambda ZIPs
+        uses: actions/download-artifact@v4
+        with:
+          name: lambda-zips
+          path: environments/build
 
       - name: Terraform Init
         run: terraform init
