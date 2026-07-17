@@ -3,4 +3,5 @@
 *.tfstate.backup
 *.tfvars
 !example.tfvars
-build/
+build/*
+!build/.gitkeep
