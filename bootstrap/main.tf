@@ -79,8 +79,8 @@ data "aws_iam_policy_document" "github_actions_assume" {
     }
     condition {
       test     = "StringLike"
-      variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rasheedsafwan/*"]
+      variable = "token.actions.githubusercontent.com:job_workflow_ref"
+      values   = ["rasheedsafwan/chatops_slack/.github/workflows/terraform.yml@*"]
     }
   }
 }
