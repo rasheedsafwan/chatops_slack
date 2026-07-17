@@ -77,8 +77,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lambda-zips
-          path: environments/build/
-          if-no-files-found: ignore # Prevents crashing if no changes/zips were generated
+          path: build/
+          if-no-files-found: error 
 
   apply:
     needs: plan
@@ -114,9 +114,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: lambda-zips
-          path: environments/build
-          # If a PR plan didn't yield zip changes, apply step skips erroring here
-          # by adding a fallback folder generation below
+          path: build
           
       - name: Ensure Fallback Build Directory for Apply
         run: mkdir -p ../../build
