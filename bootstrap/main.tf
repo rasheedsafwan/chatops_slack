@@ -80,7 +80,7 @@ data "aws_iam_policy_document" "github_actions_assume" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:rasheedsafwan/chatops_slack:*"]
+      values   = ["repo:rasheedsafwan/*"]
     }
   }
 }
