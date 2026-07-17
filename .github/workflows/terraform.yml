@@ -29,7 +29,6 @@ jobs:
           curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" \
           | python3 -c "import sys, json, base64; d=json.load(sys.stdin); t=d['value'].split('.')[1]; t += '=' * (-len(t) % 4); print(json.dumps(json.loads(base64.urlsafe_b64decode(t)), indent=2))"
-          
 
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
@@ -44,6 +43,9 @@ jobs:
 
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
+
+      - name: Ensure Lambda build directory exists
+        run: mkdir -p ../../build
 
       - name: Terraform Init
         run: terraform init
@@ -93,6 +95,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.0"
+
+      - name: Ensure Lambda build directory exists
+        run: mkdir -p ../../build
 
       - name: Terraform Init
         run: terraform init
