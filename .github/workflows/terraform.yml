@@ -71,12 +71,14 @@ jobs:
         with:
           name: tfplan
           path: environments/dev/tfplan
+          if-no-files-found: error
 
       - name: Upload Lambda ZIP Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: lambda-zips
           path: environments/build/
+          if-no-files-found: ignore # Prevents crashing if no changes/zips were generated
 
   apply:
     needs: plan
@@ -113,6 +115,11 @@ jobs:
         with:
           name: lambda-zips
           path: environments/build
+          # If a PR plan didn't yield zip changes, apply step skips erroring here
+          # by adding a fallback folder generation below
+          
+      - name: Ensure Fallback Build Directory for Apply
+        run: mkdir -p ../../build
 
       - name: Terraform Init
         run: terraform init
