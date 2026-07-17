@@ -5,10 +5,10 @@ resource "aws_sns_topic" "chatopsbot_alerts" {
 # AWS Chatbot Slack channel configuration
 resource "aws_chatbot_slack_channel_configuration" "chatopsbot" {
   configuration_name = "chatopsbot-${var.environment}"
-  iam_role_arn        = aws_iam_role.chatbot_role.arn
-  slack_channel_id    = var.slack_channel_id
-  slack_team_id       = var.slack_workspace_id
-  sns_topic_arns      = [aws_sns_topic.chatopsbot_alerts.arn]
+  iam_role_arn       = aws_iam_role.chatbot_role.arn
+  slack_channel_id   = var.slack_channel_id
+  slack_team_id      = var.slack_workspace_id
+  sns_topic_arns     = [aws_sns_topic.chatopsbot_alerts.arn]
 
   logging_level = "ERROR"
 }
@@ -58,8 +58,8 @@ data "aws_iam_policy_document" "chatbot_slack_commands" {
   }
 
   statement {
-    sid       = "AllowCloudWatchAndLogs"
-    actions   = [
+    sid = "AllowCloudWatchAndLogs"
+    actions = [
       "cloudwatch:DescribeAlarms",
       "logs:FilterLogEvents"
     ]

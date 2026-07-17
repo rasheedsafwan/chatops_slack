@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "lambda_remediation_permissions" {
   statement {
     actions   = ["cloudwatch:DescribeAlarms"]
     resources = ["*"]
-}
+  }
 
   statement {
     actions   = ["logs:FilterLogEvents", "logs:GetLogEvents"]

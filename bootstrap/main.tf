@@ -17,14 +17,14 @@ resource "aws_s3_bucket" "tf_state" {
   bucket = "chatopsbot-terraform-state-safwinho"
 
   lifecycle {
-    prevent_destroy = false  # true for production; guardrail: stops `terraform destroy` 
+    prevent_destroy = false # true for production; guardrail: stops `terraform destroy` 
   }
 }
 
 resource "aws_s3_bucket_versioning" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id
   versioning_configuration {
-    status = "Enabled"  # roll back to a previous state file if something goes wrong
+    status = "Enabled" # roll back to a previous state file if something goes wrong
   }
 }
 
@@ -81,6 +81,11 @@ data "aws_iam_policy_document" "github_actions_assume" {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:job_workflow_ref"
       values   = ["rasheedsafwan/chatops_slack/.github/workflows/terraform.yml@*"]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "token.actions.githubusercontent.com:sub"
+      values   = ["repo:rasheedsafwan@*/chatops_slack@*:*"]
     }
   }
 }

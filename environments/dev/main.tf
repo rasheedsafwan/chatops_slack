@@ -1,15 +1,15 @@
 terraform {
-    required_version = ">= 1.0.0"
-    required_providers {
-      aws = {
-        source = "hashicorp/aws"
-        version = "~> 5.0"
-      }
+  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
+  }
 }
 
 provider "aws" {
-    region = var.aws_region
+  region = var.aws_region
 }
 
 module "iam" {
@@ -32,15 +32,15 @@ module "monitoring" {
 }
 
 module "notifications" {
-  source              = "../../modules/notifications"
-  environment         = var.environment
-  slack_workspace_id  = var.slack_workspace_id
-  slack_channel_id    = var.slack_channel_id
+  source             = "../../modules/notifications"
+  environment        = var.environment
+  slack_workspace_id = var.slack_workspace_id
+  slack_channel_id   = var.slack_channel_id
 }
 
 module "dashboard" {
-  source              = "../../modules/dashboard"
-  environment         = var.environment
-  status_lambda_arn   = module.lambda.status_function_arn
-  status_lambda_name  = module.lambda.status_function_name
+  source             = "../../modules/dashboard"
+  environment        = var.environment
+  status_lambda_arn  = module.lambda.status_function_arn
+  status_lambda_name = module.lambda.status_function_name
 }
