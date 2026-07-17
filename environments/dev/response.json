@@ -1,0 +1,1 @@
+{"errorMessage": "Refusing: target must be a chatopsbot-managed function", "errorType": "ValueError", "requestId": "962e1486-c8f4-4a01-a395-cd2dcc10e690", "stackTrace": ["  File \"/var/task/handler.py\", line 14, in handler\n    raise ValueError(\"Refusing: target must be a chatopsbot-managed function\")\n"]}

@@ -1,0 +1,2 @@
+slack_workspace_id = "YOUR_SLACK_WORKSPACE_ID"
+slack_channel_id   = "YOUR_SLACK_CHANNEL_ID"

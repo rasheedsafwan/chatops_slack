@@ -1,0 +1,32 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, Segoe UI, sans-serif; }
+
+body { background: #0f1117; color: #e6e6e6; padding: 2rem; }
+
+header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+
+h1 { font-size: 1.5rem; font-weight: 600; }
+
+.badge {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge.ok { background: #1a4d2e; color: #7ee2a8; }
+.badge.alarm { background: #4d1a1a; color: #ff8a8a; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #262a35;
+  font-size: 0.9rem;
+}
+
+th { color: #9aa0ac; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; }
+
+td.state-OK { color: #7ee2a8; font-weight: 600; }
+td.state-ALARM { color: #ff8a8a; font-weight: 600; }
+td.state-INSUFFICIENT_DATA { color: #d8c46a; font-weight: 600; }

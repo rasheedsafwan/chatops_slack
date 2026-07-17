@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ChatOpsBot Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>ChatOpsBot — System Status</h1>
+    <span id="overall-badge" class="badge">Loading...</span>
+  </header>
+
+  <main>
+    <table id="alarm-table">
+      <thead>
+        <tr><th>Alarm</th><th>State</th><th>Reason</th><th>Last Updated</th></tr>
+      </thead>
+      <tbody id="alarm-body">
+        <tr><td colspan="4">Fetching alarm data…</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
